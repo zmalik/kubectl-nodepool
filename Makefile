@@ -17,5 +17,17 @@ darwin-%:
 linux-%:
 	GOARCH=$* GOOS=linux $(GOBUILD) -o $(NAME)-$(VERSION)-$@/$(NAME)
 
+gz_releases=$(addsuffix .tar.gz, $(PLATFORM_LIST))
+
+$(gz_releases): %.tar.gz : %
+	tar czf $(NAME)-$(VERSION)-$@ -C $(NAME)-$(VERSION)-$</ ../LICENSE $(NAME)
+
+sha256_releases=$(addsuffix .tar.gz.sha256, $(PLATFORM_LIST))
+
+$(sha256_releases): %.sha256 : %
+	shasum -a 256 $(NAME)-$(VERSION)-$< > $(NAME)-$(VERSION)-$@
+
+releases: $(gz_releases) $(sha256_releases)
+
 install:
 	CGO_ENABLED=0 go install -trimpath -ldflags $(GO_LDFLAGS)

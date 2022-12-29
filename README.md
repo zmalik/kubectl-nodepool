@@ -1,7 +1,9 @@
 # kubectl-nodepool
 kubectl plugin to inspect group of nodes
 
-The plugin uses common node labels and taints to group nodes into node pools.
+The plugin uses common node labels to group nodes into nodepools.
+
+Currently supports *AKS*, *GKE* and *EKS* clusters
 
 ## Installation
 

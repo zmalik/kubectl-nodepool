@@ -99,5 +99,11 @@ func getNodepoolName(labels map[string]string) string {
 	if name, ok := labels["kubernetes.azure.com/agentpool"]; ok {
 		return name
 	}
+	if name, ok := labels["cloud.google.com/gke-nodepool"]; ok {
+		return name
+	}
+	if name, ok := labels["eks.amazonaws.com/nodegroup"]; ok {
+		return name
+	}
 	return no_name
 }

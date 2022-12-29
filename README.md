@@ -6,7 +6,7 @@ The plugin uses common node labels and taints to group nodes into node pools.
 ## Installation
 
 ```
-go install github.com/zmalik/kubectl-nodepool
+go install github.com/zmalik/kubectl-nodepool@latest
 ```
 
 ## Usage

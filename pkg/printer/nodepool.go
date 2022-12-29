@@ -76,9 +76,13 @@ func getMapToken(node corev1.Node) string {
 	arch := node.Labels["beta.kubernetes.io/arch"]
 	os := node.Labels["kubernetes.io/os"]
 	instanceType := node.Labels["beta.kubernetes.io/instance-type"]
-	taints := formatTaintsAsString(node.Spec.Taints)
-
 	name := getNodepoolName(node.Labels)
+	taints := ""
+	if name == no_name {
+		// use taints if name is not set
+		taints = formatTaintsAsString(node.Spec.Taints)
+	}
+
 	return fmt.Sprintf("%s-%s-%s-%s-%s", arch, os, instanceType, name, taints)
 }
 
